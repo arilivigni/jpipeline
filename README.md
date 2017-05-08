@@ -1,2 +1,2 @@
 # jpipeline
-Testing Jenkins Declarative Pipeline
+Testing Jenkins Declarative Pipelines
