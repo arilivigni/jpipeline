@@ -19,6 +19,7 @@ properties(
 )
 
 
+
 node('aos-ci-cd-slave') {
     ansiColor('xterm') {
         timestamps {
@@ -60,10 +61,8 @@ node('aos-ci-cd-slave') {
                         sh '''
                             ls -l cciskel
                         '''
-                        buildDuffy {
-                            name = 'ARI-Test'
-                        }
-                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                        buildDuffy()
+                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt,*.props'
                     }
                     stage('ostree-compose') {
                         echo "ostree-compose"
@@ -75,3 +74,15 @@ node('aos-ci-cd-slave') {
         }
     }
 }
+
+
+def buildDuffy() {
+  sh '''
+    cat > duffy-allocate.props << EOF
+    ORIGIN_WORKSPACE=${WORKSPACE}
+    ORIGIN_BUILD_TAG=${BUILD_TAG}
+    ORIGIN_CLASS=builder
+    DUFFY_JOB_TIMEOUT_SECS=3600
+  '''
+}
+
