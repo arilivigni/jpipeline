@@ -64,10 +64,16 @@ node('aos-ci-cd-slave') {
                         buildDuffy()
                         archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt,*.props'
                     }
-                    stage('ostree-compose') {
-                        echo "ostree-compose"
+                    stage('ostree-compose-tree') {
+                        echo "ostree-compose-tree"
                         sh '''
                             ls -l ci-pipeline
+                        '''
+                    }
+                    stage('ostree-compose-image') {
+                        echo "ostree-compose-image"
+                        sh '''
+                            ls -l sig-atomic-buildscripts
                         '''
                     }
               }
