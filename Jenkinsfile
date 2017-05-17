@@ -33,7 +33,7 @@ node('aos-ci-cd-slave') {
                 dir('cciskel') {
                   git 'https://github.com/cgwalters/centos-ci-skeleton'
                 }
-                dir('sig-automic-buildscripts') {
+                dir('sig-atomic-buildscripts') {
                   git 'https://github.com/CentOS/sig-atomic-buildscripts'
                 }
                 sh '''
