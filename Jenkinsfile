@@ -1,94 +1,66 @@
 properties(
-    [
-        [$class: 'BuildConfigProjectProperty', name: '', namespace: '', resourceVersion: '', uid: ''],
-        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '15', daysToKeepStr: '', numToKeepStr: '30')),
-        disableConcurrentBuilds(),
-        [$class: 'HudsonNotificationProperty', enabled: false],
-        [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
-        parameters(
-            [
-             string(defaultValue: 'f25', description: 'Branch to run against', name: 'BRANCH'),
-             string(description: 'fedmsg msg', name: 'CI_MESSAGE')
-            ]
-        ),
-        [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 0, maxConcurrentTotal: 0, paramsToUseForLimit: '', throttleEnabled: false, throttleOption: 'project'],
-        pipelineTriggers(
-            [[$class: 'CIBuildTrigger', checks: [[expectedValue: '".+compose_id.+Fedora-Atomic.+"', field: 'compose']], providerName: 'fedmsg', selector: 'org.fedoraproject.prod.fedimg.image.upload']]
-        )
-    ]
+        [
+                buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '15', daysToKeepStr: '', numToKeepStr: '30')),
+                disableConcurrentBuilds(),
+        ]
 )
-
 
 
 node('aos-ci-cd-slave') {
     ansiColor('xterm') {
         timestamps {
-              deleteDir()
-              currentBuild.description = "${BRANCH}"
-              stage('dist-git-trigger') {
-                echo "dist-git-trigger"
-                dir('ci-pipeline') {
-                  git 'https://github.com/CentOS-PaaS-SIG/ci-pipeline'
-                }
-                dir('cciskel') {
-                  git 'https://github.com/cgwalters/centos-ci-skeleton'
-                }
-                dir('sig-atomic-buildscripts') {
-                  git 'https://github.com/CentOS/sig-atomic-buildscripts'
-                }
-                sh '''
-                    #!/bin/bash
-
-                    if [[ "${BRANCH}" =~ "^(f25|f26)$" ]]; then
-                        echo "Not the Branch we want: ${BRANCH}"
-                        exit 0
-                    fi
-
-                    virtualenv $WORKSPACE/ci-venv
-                    . $WORKSPACE/ci-venv/bin/activate
-                    #pip install ansible
-                    echo "BRANCH = ${BRANCH}"
-                    ls
-
-                    touch $WORKSPACE/CI_MESSAGE.txt
-                    touch $WORKSPACE/trigger.downstream
-                '''
-                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt,*.downstream'
-              }
-              if (fileExists("${env.WORKSPACE}/trigger.downstream")) {
-                    stage('rpm-build') {
-                        echo "rpm-build"
-                        sh '''
-                            ls -l cciskel
+            try {
+                deleteDir()
+                stage('stage-one') {
+                    def stage = 'stage-one'
+                    writeFile file: "${env.WORKSPACE}/job-${stage}.props",
+                            text: "RSYNC_PASSWORD=21331f76\n" +
+                                    "DUFFY_HOST=n33.crusty.ci.centos.org\n"
+                    def props_file = "${env.WORKSPACE}/job-${stage}.props"
+                    def new_props_file = "${env.WORKSPACE}/job-${stage}-new.props"
+                    convertProps(props_file, new_props_file)
+                    env.ANSIBLE_HOST_KEY_CHECKING = "False"
+                    load("${WORKSPACE}/job-${stage}-new.props")
+                    sh '''
+                            #echo "test"
+                            echo "HOST=${DUFFY_HOST}"
+                            echo "ATEST=${ANSIBLE_HOST_KEY_CHECKING}"
                         '''
-                        buildDuffy()
-                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt,*.props'
-                    }
-                    stage('ostree-compose-tree') {
-                        echo "ostree-compose-tree"
-                        sh '''
-                            ls -l ci-pipeline
+                    currentBuild.result = 'SUCCESS'
+                }
+                stage('stage-two') {
+                    def stage = 'stage-two'
+                    writeFile file: "${env.WORKSPACE}/job-${stage}.props",
+                            text: "RSYNC_PASSWORD=245554f76\n" +
+                                    "DUFFY_HOST=n46.crusty.ci.centos.org\n"
+                    def props_file = "${env.WORKSPACE}/job-${stage}.props"
+                    def new_props_file = "${env.WORKSPACE}/job-${stage}-new.props"
+                    convertProps(props_file, new_props_file)
+                    env.ANSIBLE_HOST_KEY_CHECKING = "True"
+                    load("${WORKSPACE}/job-${stage}-new.props")
+                    sh '''
+                            #echo "test"
+                            echo "HOST=${DUFFY_HOST}"
+                            echo "ATEST=${ANSIBLE_HOST_KEY_CHECKING}"
                         '''
-                    }
-                    stage('ostree-compose-image') {
-                        echo "ostree-compose-image"
-                        sh '''
-                            ls -l sig-atomic-buildscripts
-                        '''
-                    }
-              }
+                    currentBuild.result = 'SUCCESS'
+                }
+            } catch (e) {
+                // if any exception occurs, mark the build as failed
+                currentBuild.result = 'FAILURE'
+                throw e
+            } finally {
+                currentBuild.displayName = "Build# - ${env.BUILD_NUMBER}"
+                currentBuild.description = "${currentBuild.result}"
+                emailext subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - STATUS = ${currentBuild.result}", to: "ari@redhat.com", body: "This pipeline was a ${currentBuild.result}"
+                step([$class: 'ArtifactArchiver', artifacts: '*.props', allowEmptyArchive: true])
+            }
         }
     }
 }
 
-
-def buildDuffy() {
-  sh '''
-    cat > duffy-allocate.props << EOF
-    ORIGIN_WORKSPACE=${WORKSPACE}
-    ORIGIN_BUILD_TAG=${BUILD_TAG}
-    ORIGIN_CLASS=builder
-    DUFFY_JOB_TIMEOUT_SECS=3600
-  '''
+def convertProps(file1, file2) {
+    def command = $/awk -F'=' '{print "env."$1"=\""$2"\""}' ${file1} > ${file2}/$
+    sh command
 }
 
