@@ -90,6 +90,8 @@ node('fedora-atomic') {
                     convertProps(job_props, job_props_groovy)
                     load(job_props_groovy)
 
+                    echo "Current Topic is: ${topic}"
+
                     // Send message org.centos.prod.ci.pipeline.package.queued or .ignore on fedmsg
                     sendCIMessage messageContent: '',
                             messageProperties: "topic=${topic}\n" +
