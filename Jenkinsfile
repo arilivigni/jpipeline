@@ -4,9 +4,10 @@ properties(
                 disableConcurrentBuilds(),
                 parameters(
                         [
-                                string(defaultValue: '{"commit":{"username":"zbyszek","stats":{"files":{"sources":{"deletions":1,"additions":1,"lines":2},"mathjax.spec":{"deletions":6,"additions":12,"lines":18},".gitignore":{"deletions":0,"additions":1,"lines":1}},"total":{"deletions":7,"files":3,"additions":14,"lines":21}},"name":"Zbigniew Jędrzejewski-Szmek","rev":"d80c88826452fc89d0d0757be25a55af3723e25e","namespace":"rpms","agent":"zbyszek","summary":"Update to 2.7.1","repo":"mathjax","branch":"master","seen":false,"path":"/srv/git/repositories/rpms/mathjax.git","message":"Update to 2.7.1\\n","email":"zbyszek@in.waw.pl"},"topic":"org.fedoraproject.prod.git.receive"}', description: 'fedmsg msg', name: 'CI_MESSAGE'),
+                                string(defaultValue: '{"commit":{"username":"pbrobinson","stats":{"files":{"mesa-7.1-vc4-fixes.patch":{"deletions":8,"additions":395,"lines":403}},"total":{"deletions":8,"files":1,"additions":395,"lines":403}},"name":"Peter Robinson","rev":"eebf5854bf60752f16ebda292d55e556e4888344","namespace":"rpms","agent":"pbrobinson","summary":"update of vc4 patch set to fix ftb","repo":"mesa","branch":"master","seen":false,"path":"/srv/git/repositories/rpms/mesa.git","message":"update of vc4 patch set to fix ftb\\n","email":"pbrobinson@gmail.com"},"topic":"org.fedoraproject.prod.git.receive"}', description: 'fedmsg msg', name: 'CI_MESSAGE'),
                                 string(defaultValue: '^(f25|f26|master)$', description: 'fedora branch targets', name: 'TARGETS'),
                                 string(defaultValue: 'ci-pipeline', description: 'Main project repo', name: 'PROJECT_REPO'),
+                                string(defaultValue: 'org.centos.prod', description: 'main topic to publish on', name: 'MAIN_TOPIC')
                         ]
                 )
         ]
@@ -15,12 +16,22 @@ properties(
 node('fedora-atomic') {
     ansiColor('xterm') {
         timestamps {
+            def current_stage = "ci-pipeline"
             try {
                 deleteDir()
                 stage('ci-pipeline-rpmbuild-trigger') {
-                    def current_stage = "ci-pipeline-rpmbuild-trigger"
+                    current_stage = "ci-pipeline-rpmbuild-trigger"
                     env.basearch = "x86_64"
 
+                    // Set default main topic for messaging
+                    if ((env.MAIN_TOPIC == null) || ("${env.MAIN_TOPIC}" == "")) {
+                        env.MAIN_TOPIC = "org.centos.stage"
+                    }
+
+                    // SCM
+                    dir('ci-pipeline') {
+                        git 'https://github.com/CentOS-PaaS-SIG/ci-pipeline'
+                    }
                     // Python script to parse the ${CI_MESSAGE}
                     writeFile file: "${env.WORKSPACE}/parse_fedmsg.py",
                             text: "#!/bin/env python\n" +
@@ -68,9 +79,9 @@ node('fedora-atomic') {
                         # Verify this is a branch in our list of targets defined above in the parameters
                         #if [[ ! "${fed_branch}" =~ "${TARGETS}" ]]; then
                         #    echo "${fed_branch} is not in the list"
-                        #    echo "topic=org.centos.prod.ci.pipeline.package.ignore" >> ${WORKSPACE}/job.properties
+                        #    echo "topic=${MAIN_TOPIC}.ci.pipeline.package.ignore" >> ${WORKSPACE}/job.properties
                         #else                                           
-                            echo "topic=org.centos.prod.ci.pipeline.package.queued" >> ${WORKSPACE}/job.properties
+                            echo "topic=${MAIN_TOPIC}.ci.pipeline.package.queued" >> ${WORKSPACE}/job.properties
                             touch ${WORKSPACE}/trigger.downstream                         
                         #fi
                     '''
@@ -79,14 +90,29 @@ node('fedora-atomic') {
                     convertProps(job_props, job_props_groovy)
                     load(job_props_groovy)
 
+                    // Send message org.centos.prod.ci.pipeline.package.queued or .ignore on fedmsg
+                    sendCIMessage messageContent: '',
+                            messageProperties: "topic=${topic}\n" +
+                                    "build_url=${BUILD_URL}\n" +
+                                    "build_id=${BUILD_ID}\n" +
+                                    "branch=${branch}\n" +
+                                    "ref=fedora/${branch}/x86_64/atomic-host\n" +
+                                    "rev=${fed_rev}\n" +
+                                    "repo=${fed_repo}\n" +
+                                    "namespace=${fed_namespace}\n" +
+                                    "username=fedora-atomic\n" +
+                                    "test_guidance=''\n" +
+                                    "status=success",
+
+                            messageType: 'Custom',
+                            overrides: [topic: "${topic}"],
+                            providerName: 'fedora-fedmsg'
+
                     currentBuild.result = 'SUCCESS'
                 }
                 if (fileExists("${env.WORKSPACE}/trigger.downstream")) {
                     stage('ci-pipeline-rpmbuild') {
                         // SCM
-                        dir('ci-pipeline') {
-                            git 'https://github.com/CentOS-PaaS-SIG/ci-pipeline'
-                        }
                         dir('cciskel') {
                             git 'https://github.com/cgwalters/centos-ci-skeleton'
                         }
@@ -95,10 +121,10 @@ node('fedora-atomic') {
                         }
 
                         // Set groovy and env vars
-                        def current_stage = "ci-pipeline-rpmbuild"
+                        current_stage = "ci-pipeline-rpmbuild"
                         env.task = "ci-pipeline/tasks/rpmbuild-test"
-                        env.topic = "org.centos.prod.ci.pipeline.package.running"
-                        env.playbook = "ci-pipeline/config/duffy-setup/setup-rpmbuild-system.yml"
+                        env.topic = "${MAIN_TOPIC}.ci.pipeline.package.running"
+                        env.playbook = "ci-pipeline/playbooks/duffy-setup/setup-rpmbuild-system.yml"
                         env.ref = "fedora/${branch}/${basearch}/atomic-host"
                         env.repo = "${fed_repo}"
                         env.rev = "${fed_rev}"
@@ -126,7 +152,7 @@ node('fedora-atomic') {
                                         "export JENKINS_BUILD_TAG=\"${BUILD_TAG}-${current_stage}\"\n" +
                                         "export OSTREE_BRANCH=\"\${OSTREE_BRANCH:-}\"\n" +
                                         "export fed_repo=\"${fed_repo}\"\n" +
-                                        "export fed_branch=\"${branch}\"\n" +
+                                        "export fed_branch=\"${fed_branch}\"\n" +
                                         "export fed_rev=\"${fed_rev}\"\n"
                         //rsyncResults("$current_stage")
 
@@ -152,9 +178,9 @@ node('fedora-atomic') {
                     }
                     stage('ci-pipeline-ostree-compose') {
                         // Set groovy and env vars
-                        def current_stage="ci-pipeline-ostree-compose"
+                        current_stage="ci-pipeline-ostree-compose"
                         env.task = "./ci-pipeline/tasks/ostree-compose"
-                        env.topic = "org.centos.prod.ci.pipeline.compose.running"
+                        env.topic = "${MAIN_TOPIC}.ci.pipeline.compose.running"
                         env.playbook = "sig-atomic-buildscripts/centos-ci/setup/setup-system.yml"
                         env.ref = "fedora/${branch}/${basearch}/atomic-host"
                         env.repo = "${fed_repo}"
@@ -210,7 +236,7 @@ node('fedora-atomic') {
                                 //env.DUFFY_OP = "--allocate"
 
                                 // Send message org.centos.prod.ci.pipeline.image.running on fedmsg
-                                env.topic = "org.centos.prod.ci.pipeline.image.running"
+                                env.topic = "${MAIN_TOPIC}.ci.pipeline.image.running"
 
                                 // Provision resources
                                 env.DUFFY_OP = "--allocate"
@@ -250,7 +276,7 @@ node('fedora-atomic') {
                                 //        "DUFFY_HOST=${env.DUFFY_HOST}"
 
                                 // Send message org.centos.prod.ci.pipeline.image.complete on fedmsg
-                                env.topic = "org.centos.prod.ci.pipeline.image.complete"
+                                env.topic = "${MAIN_TOPIC}.ci.pipeline.image.complete"
                                 currentBuild.result = 'SUCCESS'
                             }
                             stage("ci-pipeline-ostree-image-boot-sanity") {
@@ -262,7 +288,7 @@ node('fedora-atomic') {
                                 //env.DUFFY_OP = "--allocate"
 
                                 // Send message org.centos.prod.ci.pipeline.image.test.smoke.running on fedmsg
-                                env.topic = "org.centos.prod.ci.pipeline.image.test.smoke.running"
+                                env.topic = "${MAIN_TOPIC}.ci.pipeline.image.test.smoke.running"
 
                                 // Provision resources
                                 //env.DUFFY_OP = "--allocate"
@@ -302,7 +328,7 @@ node('fedora-atomic') {
                                 //        "DUFFY_HOST=${env.DUFFY_HOST}"
 
                                 // Send message org.centos.prod.ci.pipeline.image.test.smoke.complete on fedmsg
-                                env.topic = "org.centos.prod.ci.pipeline.image.test.smoke.complete"
+                                env.topic = "${MAIN_TOPIC}.ci.pipeline.image.test.smoke.complete"
                                 currentBuild.result = 'SUCCESS'
                             }
 
@@ -310,12 +336,12 @@ node('fedora-atomic') {
 
 
                         // Send message org.centos.prod.ci.pipeline.compose.complete on fedmsg
-                        env.topic = "org.centos.prod.ci.pipeline.compose.complete"
+                        env.topic = "${MAIN_TOPIC}.ci.pipeline.compose.complete"
                         currentBuild.result = 'SUCCESS'
                     }
                     stage('ci-pipeline-ostree-boot-sanity') {
                         // Set groovy and env vars
-                        def current_stage = "ci-pipeline-ostree-boot-sanity"
+                        current_stage = "ci-pipeline-ostree-boot-sanity"
                         env.task = "./ci-pipeline/tasks/ostree-boot-image"
                         env.playbook = "sig-atomic-buildscripts/centos-ci/setup/setup-system.yml"
 
@@ -365,7 +391,7 @@ node('fedora-atomic') {
                     }
                     stage('ci-pipeline-atomic-host-tests') {
                         // Set groovy and env vars
-                        def current_stage="ci-pipeline-atomic-host-tests"
+                        current_stage="ci-pipeline-atomic-host-tests"
                         env.task = "./ci-pipeline/tasks/atomic-host-tests"
                         env.playbook = "sig-atomic-buildscripts/centos-ci/setup/setup-system.yml"
 
@@ -408,6 +434,14 @@ node('fedora-atomic') {
             } catch (e) {
                 // if any exception occurs, mark the build as failed
                 currentBuild.result = 'FAILURE'
+
+                // Teardown resources
+                //env.DUFFY_OP="--teardown"
+                //echo "Duffy Deallocate ran for stage ${current_stage} with option ${env.DUFFY_OP}\r\n" +
+                //        "RSYNC_PASSWORD=${env.RSYNC_PASSWORD}\r\n" +
+                //        "DUFFY_HOST=${env.DUFFY_HOST}"
+                allocDuffy("${current_stage}")
+
                 throw e
             } finally {
                 currentBuild.displayName = "Build# - ${env.BUILD_NUMBER}"
@@ -477,7 +511,8 @@ def rsyncResults(stage) {
         #!/bin/bash
         set -xeuo pipefail
 
-        (echo -n "export RSYNC_PASSWORD=" && cat ~/duffy.key | cut -c '-13') > rsync-password.sh
+        source ${ORIGIN_WORKSPACE}/task.env
+        (echo -n "export RSYNC_PASSWORD=${RSYNC_PASSWORD}" && cat ~/duffy.key | cut -c '-13') > rsync-password.sh
         
         rsync -Hrlptv --stats -e ssh ${ORIGIN_WORKSPACE}/task.env rsync-password.sh builder@${DUFFY_HOST}:${JENKINS_JOB_NAME}
         for repo in ci-pipeline sig-atomic-buildscripts; do
