@@ -7,7 +7,7 @@ properties(
                                 string(defaultValue: '{"commit":{"username":"pbrobinson","stats":{"files":{"mesa-7.1-vc4-fixes.patch":{"deletions":8,"additions":395,"lines":403}},"total":{"deletions":8,"files":1,"additions":395,"lines":403}},"name":"Peter Robinson","rev":"eebf5854bf60752f16ebda292d55e556e4888344","namespace":"rpms","agent":"pbrobinson","summary":"update of vc4 patch set to fix ftb","repo":"mesa","branch":"master","seen":false,"path":"/srv/git/repositories/rpms/mesa.git","message":"update of vc4 patch set to fix ftb\\n","email":"pbrobinson@gmail.com"},"topic":"org.fedoraproject.prod.git.receive"}', description: 'fedmsg msg', name: 'CI_MESSAGE'),
                                 string(defaultValue: '^(f25|f26|master)$', description: 'fedora branch targets', name: 'TARGETS'),
                                 string(defaultValue: 'ci-pipeline', description: 'Main project repo', name: 'PROJECT_REPO'),
-                                string(defaultValue: 'org.centos.prod', description: 'main topic to publish on', name: 'MAIN_TOPIC')
+                                string(defaultValue: 'org.centos.stage', description: 'main topic to publish on', name: 'MAIN_TOPIC')
                         ]
                 )
         ]
