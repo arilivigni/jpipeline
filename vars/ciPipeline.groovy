@@ -11,7 +11,7 @@ def call(body) {
 
         try {
             stage ('HelloStage') {
-                printStageMessage(${config.stage})
+                echo "Hello ${config.stage}"
             }
             stage ('Build') {
                 sh "echo 'building ${config.projectName} ...'"
@@ -38,8 +38,4 @@ def call(body) {
             throw err
         }
     }
-}
-
-def pringStageMessage (stage) {
-    echo "Hello ${stage}"
 }
