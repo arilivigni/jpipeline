@@ -10,8 +10,8 @@ def call(body) {
         deleteDir()
 
         try {
-            stage ('Hello') {
-                echo "Hello World"
+            stage ('HelloStage') {
+                printStageMessage(${config.stage})
             }
             stage ('Build') {
                 sh "echo 'building ${config.projectName} ...'"
@@ -38,4 +38,8 @@ def call(body) {
             throw err
         }
     }
+}
+
+def pringStageMessage (stage) {
+    echo "Hello ${stage}"
 }
