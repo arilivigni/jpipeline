@@ -25,6 +25,9 @@ def call(body) {
                         },
                         'integration': {
                             sh "echo 'shell scripts to run integration tests...'"
+                            sh '''
+                                env
+                            '''
                         }
             }
             stage ('Deploy') {
