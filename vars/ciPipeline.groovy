@@ -5,7 +5,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    node {
+    //node {
         // Clean workspace before doing anything
         deleteDir()
 
@@ -42,5 +42,5 @@ def call(body) {
             currentBuild.result = 'FAILED'
             throw err
         }
-    }
+    //}
 }
