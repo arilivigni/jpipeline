@@ -26,7 +26,7 @@ def call(body) {
                         'integration': {
                             sh "echo 'shell scripts to run integration tests...'"
                             sh '''
-                                env
+                                printenv
                             '''
                             env.topic = "${config.mainTopic}.ci.package.complete"
                             echo "${env.topic}"
@@ -36,7 +36,7 @@ def call(body) {
                         }
             }
             stage ('Deploy') {
-                sh "echo 'deploying to server ${config.serverDomain}...'"
+                sh "echo 'deploying to server ${config.projectRepo}...'"
             }
         } catch (err) {
             currentBuild.result = 'FAILED'
