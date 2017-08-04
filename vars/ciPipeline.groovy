@@ -29,6 +29,7 @@ def call(String topic = "org.lol", body) {
                                 printenv
                             '''
                             env.topic = "${config.mainTopic}.ci.package.complete"
+                            echo "${env.MAIN_TOPIC}"
                             echo "${env.topic}"
                             sh '''
                                 echo "${topic}"
