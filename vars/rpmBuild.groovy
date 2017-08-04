@@ -1,15 +1,25 @@
-// vars/rpmBuild.groovy
+def call(body) {
 
-class rpmBuild implements Serializable {
+    def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
 
-    private String name
-    def setName(value) {
-        name = value
+    //node {
+    // Clean workspace before doing anything
+    deleteDir()
+
+    try {
+        stage ('ci-pipeline-rpmbuild') {
+            echo "Our main topic is ${config.mainTopic}"
+            sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
+            sh '''
+                echo "Project Repo is ${config.projectRepo}..."
+            '''
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
     }
-    def getName() {
-        name
-    }
-    def caution(message) {
-        echo "Hello, ${name}! CAUTION: ${message}"
-    }
+    //}
 }
