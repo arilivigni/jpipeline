@@ -11,10 +11,10 @@ def call(body) {
 
         try {
             stage ('HelloStage') {
-                echo "Hello ${config.MAIN_TOPIC}"
+                echo "Hello ${config.mainTopic}"
             }
             stage ('Build') {
-                sh "echo 'building ${config.TARGET_BRANCH} ...'"
+                sh "echo 'building ${config.targetBranch} ...'"
             }
             stage ('Tests') {
                 parallel 'static': {
@@ -28,7 +28,7 @@ def call(body) {
                             sh '''
                                 env
                             '''
-                            env.topic = "${config.MAIN_TOPIC}.ci.package.complete"
+                            env.topic = "${config.mainTopic}.ci.package.complete"
                             echo "${env.topic}"
                             sh '''
                                 echo "${topic}"
