@@ -1,4 +1,4 @@
-def allocDuffy(Stage) {
+def allocDuffy(stage) {
     //echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
     echo "Currently in stage: ${stage} resources"
     env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
