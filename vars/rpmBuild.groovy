@@ -7,10 +7,10 @@ def call(body) {
 
     //node {
     // Clean workspace before doing anything
-    deleteDir()
-
+    // deleteDir()
     try {
-        stage ('ci-pipeline-rpmbuild') {
+        def currentStage = 'ci-pipeline-rpmbuild'
+        stage (currentStage) {
             echo "Our main topic is ${config.mainTopic}"
             sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
             sh "echo 'Project Repo is ${config.projectRepo}...'"
