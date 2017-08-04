@@ -22,7 +22,8 @@ def allocDuffy(stage) {
               pushd ${ORIGIN_WORKSPACE}
             fi
             if test -n "${ORIGIN_CLASS:-}"; then
-                exec ${WORKSPACE}/cciskel/cciskel-duffy ${DUFFY_OP} --prefix=ci-pipeline --class=${ORIGIN_CLASS} --jobid=${ORIGIN_BUILD_TAG}                     --timeout=${DUFFY_JOB_TIMEOUT_SECS:-0} --count=${DUFFY_COUNT:-1}
+                exec ${WORKSPACE}/cciskel/cciskel-duffy ${DUFFY_OP} --prefix=ci-pipeline --class=${ORIGIN_CLASS} --jobid=${ORIGIN_BUILD_TAG} \
+                    --timeout=${DUFFY_JOB_TIMEOUT_SECS:-0} --count=${DUFFY_COUNT:-1}
             else
                 exec ${WORKSPACE}/cciskel/cciskel-duffy ${DUFFY_OP}
             fi
