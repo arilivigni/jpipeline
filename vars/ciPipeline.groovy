@@ -11,11 +11,10 @@ def call(body) {
 
         try {
             stage ('HelloStage') {
-                echo "Hello ${BUILD_TAG}"
+                echo "Hello ${config.MAIN_TOPIC}"
             }
             stage ('Build') {
-                sh "echo 'building ${config.projectName} ...'"
-                sh "echo 'building ${JOB_NAME} ...'"
+                sh "echo 'building ${config.TARGET_BRANCH} ...'"
             }
             stage ('Tests') {
                 parallel 'static': {
@@ -28,6 +27,11 @@ def call(body) {
                             sh "echo 'shell scripts to run integration tests...'"
                             sh '''
                                 env
+                            '''
+                            env.topic = "${config.MAIN_TOPIC}.ci.package.complete"
+                            echo "${env.topic}"
+                            sh '''
+                                echo "${topic}"
                             '''
                         }
             }
