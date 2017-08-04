@@ -1,6 +1,6 @@
 // src/org/cipipeline/utils/Utils.groovy
 
-package org.cipipeline.utils
+package org.cipipeline
 
 class Utils implements Serializable {
     def steps
