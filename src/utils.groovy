@@ -6,7 +6,7 @@ def allocDuffy(stage) {
     env.ORIGIN_CLASS = "builder"
     env.DUFFY_JOB_TIMEOUT_SECS = "3600"
 
-    //withCredentials([file(credentialsId: 'duffy-key', variable: 'DUFFY_KEY')]) {
+    withCredentials([file(credentialsId: 'duffy-key', variable: 'DUFFY_KEY')]) {
         sh '''
             #!/bin/bash
             set -xeuo pipefail
@@ -14,7 +14,7 @@ def allocDuffy(stage) {
             echo "HELLO ${JOB_NAME}"
             exit
         '''
-   // }
+    }
 }
 
 return this
