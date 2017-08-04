@@ -13,9 +13,7 @@ def call(body) {
         stage ('ci-pipeline-rpmbuild') {
             echo "Our main topic is ${config.mainTopic}"
             sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
-            sh '''
-                echo "Project Repo is ${config.projectRepo}..."
-            '''
+            sh "echo 'Project Repo is ${config.projectRepo}...'"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
