@@ -11,10 +11,11 @@ def call(body) {
 
         try {
             stage ('HelloStage') {
-                echo "Hello ${config.stage}"
+                echo "Hello ${BUILD_TAG}"
             }
             stage ('Build') {
                 sh "echo 'building ${config.projectName} ...'"
+                sh "echo 'building ${JOB_NAME} ...'"
             }
             stage ('Tests') {
                 parallel 'static': {
