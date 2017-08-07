@@ -1,4 +1,5 @@
-def duffy(stage, duffyKey, repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton',
+// Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
+def duffy(stage, duffyKey = 'duffy-key', repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton',
           subDir = 'cciskel', duffyOps = '--allocate') {
 
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
@@ -41,4 +42,5 @@ def duffy(stage, duffyKey, repoUrl = 'https://github.com/cgwalters/centos-ci-ske
     }
 }
 
+// ensure we return 'this' on last line to allow this script to be loaded into flows
 return this
