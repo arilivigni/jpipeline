@@ -1,4 +1,4 @@
-def allocDuffy(stage, repoUrl, subDir = 'cciskel', duffyKey) {
+def allocDuffy(stage, duffyKey, repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton', subDir = 'cciskel') {
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
     env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
     env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${stage}"
@@ -39,7 +39,3 @@ def allocDuffy(stage, repoUrl, subDir = 'cciskel', duffyKey) {
 }
 
 return this
-
-dir('cciskel') {
-    git 'https://github.com/cgwalters/centos-ci-skeleton'
-}
