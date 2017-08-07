@@ -1,11 +1,17 @@
-def allocDuffy(stage) {
+def allocDuffy(stage, repoUrl, subDir = 'cciskel', duffyKey) {
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
     env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
     env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${stage}"
     env.ORIGIN_CLASS = "builder"
     env.DUFFY_JOB_TIMEOUT_SECS = "3600"
 
-    withCredentials([file(credentialsId: 'duffy-key', variable: 'DUFFY_KEY')]) {
+    if (!(fileExists(subDir))) {
+        dir(subDir) {
+            git repoUrl
+        }
+    }
+
+    withCredentials([file(credentialsId: duffyKey, variable: 'DUFFY_KEY')]) {
         sh '''
             #!/bin/bash
             set -xeuo pipefail
@@ -34,3 +40,6 @@ def allocDuffy(stage) {
 
 return this
 
+dir('cciskel') {
+    git 'https://github.com/cgwalters/centos-ci-skeleton'
+}
