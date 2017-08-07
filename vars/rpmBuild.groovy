@@ -8,6 +8,7 @@ def call(body) {
     //node {
     // Clean workspace before doing anything
     // deleteDir()
+    echo "${env.JOB_NAME}"
     try {
         def currentStage = 'ci-pipeline-rpmbuild'
         stage (currentStage) {
