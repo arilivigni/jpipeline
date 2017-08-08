@@ -5,6 +5,7 @@ def call(body) {
     body.delegate = config
     body()
 
+    @Library('ci-pipeline') _
     def getDuffy = new duffy()
     //node {
     // Clean workspace before doing anything
@@ -16,7 +17,9 @@ def call(body) {
             echo "Our main topic is ${config.mainTopic}"
             sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
             sh "echo 'Project Repo is ${config.projectRepo}...'"
+            echo "duffyOps = ${config.duffyOps}"
             getDuffy.duffy(currentStage, "${config.duffyKey}", "${config.repoUrl}", "${config.subDir}", "${config.duffyOps}")
+
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
