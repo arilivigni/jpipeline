@@ -8,7 +8,7 @@ def call(body) {
     def getDuffy = new duffy()
 
     try {
-        def currentStage = 'ci-pipeline-rpmbuild'
+        def current_stage = 'ci-pipeline-rpmbuild'
         stage (currentStage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
@@ -19,7 +19,7 @@ def call(body) {
             getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
 
         }
-        currentStage = 'ci-pipeline-ostree-compose'
+        current_stage = 'ci-pipeline-ostree-compose'
         stage (currentStage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
@@ -30,7 +30,8 @@ def call(body) {
             getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
         }
     } catch (err) {
-        currentBuild.result = 'FAILED'
+        echo "Error: Exception from " + current_stage + ":"
+        echo e.getMessage()
         throw err
     }
 }
