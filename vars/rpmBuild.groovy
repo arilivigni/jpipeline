@@ -1,12 +1,11 @@
 def call(body) {
 
-    def getDuffy = new duffy()
-
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
 
+    def getDuffy = new duffy()
     //node {
     // Clean workspace before doing anything
     // deleteDir()
