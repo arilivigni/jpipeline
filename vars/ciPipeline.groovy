@@ -5,43 +5,32 @@ def call(body) {
     body.delegate = config
     body()
 
-    //node {
-        // Clean workspace before doing anything
-        deleteDir()
+    def getDuffy = new duffy()
 
-        try {
-            stage ('HelloStage') {
-                echo "Hello ${config.mainTopic}"
-            }
-            stage ('Build') {
-                sh "echo 'building ${config.targetBranch} ...'"
-            }
-            stage ('Tests') {
-                parallel 'static': {
-                    sh "echo 'shell scripts to run static tests...'"
-                },
-                        'unit': {
-                            sh "echo 'shell scripts to run unit tests...'"
-                        },
-                        'integration': {
-                            sh "echo 'shell scripts to run integration tests...'"
-                            sh '''
-                                printenv
-                            '''
-                            env.topic = "${config.mainTopic}.ci.package.complete"
-                            echo "${env.MAIN_TOPIC}"
-                            echo "${env.topic}"
-                            sh '''
-                                echo "${topic}"
-                            '''
-                        }
-            }
-            stage ('Deploy') {
-                sh "echo 'deploying to server ${config.projectRepo}...'"
-            }
-        } catch (err) {
-            currentBuild.result = 'FAILED'
-            throw err
+    try {
+        def currentStage = 'ci-pipeline-rpmbuild'
+        stage (currentStage) {
+            echo "Our main topic is ${config.mainTopic}"
+            sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
+            sh "echo 'Project Repo is ${config.projectRepo}...'"
+            env.DUFFY_OPS = "--allocate"
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
+            env.DUFFY_OPS = "--teardown"
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
+
         }
-    //}
+        currentStage = 'ci-pipeline-ostree-compose'
+        stage (currentStage) {
+            echo "Our main topic is ${config.mainTopic}"
+            sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
+            sh "echo 'Project Repo is ${config.projectRepo}...'"
+            env.DUFFY_OPS = "--allocate"
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
+            env.DUFFY_OPS = "--teardown"
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
+    }
 }
