@@ -8,7 +8,7 @@ def call(body) {
     def getDuffy = new duffy()
 
     try {
-        def current_stage = 'ci-pipeline-rpmbuild'
+        def current_stage = 'ci-pipeline-ostree-compose'
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'ostree compose on branch ${env.TARGET_BRANCH} ...'"
