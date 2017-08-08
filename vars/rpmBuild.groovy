@@ -6,6 +6,7 @@ def call(body) {
     body()
 
     def getDuffy = new duffy()
+    def getProps = new utils()
 
     try {
         def current_stage = 'ci-pipeline-rpmbuild'
@@ -15,6 +16,18 @@ def call(body) {
             sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
             env.DUFFY_OPS = "--allocate"
             getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
+            sh '''
+                echo "branch=${TARGET_BRANCH}" > ${WORKSPACE}/job.properties
+                echo "topic=${MAIN_TOPIC}.package.complete" >> ${WORKSPACE}/job.properties
+            '''
+            def job_props = "${env.WORKSPACE}/job.properties"
+            def job_props_groovy = "${env.WORKSPACE}/job.properties.groovy"
+            getProps.convertProps(job_props, job_props_groovy)
+            sh '''
+                cat ${WORKSPACE}/job.properties
+                cat ${WORKSPACE}/job.properties.groovy
+            '''
+            load(job_props_groovy)
             env.DUFFY_OPS = "--teardown"
             getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
 
