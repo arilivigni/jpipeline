@@ -16,8 +16,9 @@ def call(body) {
             echo "Our main topic is ${config.mainTopic}"
             sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
             sh "echo 'Project Repo is ${config.projectRepo}...'"
-            echo "duffyOps = ${config.duffyOps}"
-            getDuffy.duffy(currentStage, "${config.duffyKey}", "${config.repoUrl}", "${config.subDir}", "${config.duffyOps}")
+            env.DUFFY_OPS = "--no-op"
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
+            getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
 
         }
     } catch (err) {

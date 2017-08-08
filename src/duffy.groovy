@@ -1,6 +1,6 @@
 // Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
-def duffy(stage, duffyKey = 'duffy-key', repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton',
-          subDir = 'cciskel', duffyOps = '--allocate') {
+def duffy(stage,  duffyOps = '--allocate', duffyKey = 'duffy-key',
+          repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton', subDir = 'cciskel') {
 
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
     env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
