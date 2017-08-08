@@ -5,16 +5,17 @@ def call(body) {
     body.delegate = config
     body()
 
+    def getDuffy = new duffy()
     //node {
     // Clean workspace before doing anything
     // deleteDir()
-    echo "${env.JOB_NAME}"
     try {
         def currentStage = 'ci-pipeline-rpmbuild'
         stage (currentStage) {
             echo "Our main topic is ${config.mainTopic}"
             sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
             sh "echo 'Project Repo is ${config.projectRepo}...'"
+            getDuffy(currentStage, "${config.duffyKey}", "${config.repoUrl}", "${config.subDir}", "${config.duffyOps}")
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
