@@ -2,12 +2,12 @@
 def duffy(stage,  duffyOps = '--allocate', duffyKey = 'duffy-key',
           repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton', subDir = 'cciskel') {
 
-    echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
     env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
     env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${stage}"
     env.ORIGIN_CLASS = "builder"
     env.DUFFY_JOB_TIMEOUT_SECS = "3600"
     env.DUFFY_OP = "${duffyOps}"
+    echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
 
     if (!(fileExists(subDir))) {
         dir(subDir) {
