@@ -10,9 +10,9 @@ def call(body) {
     try {
         def currentStage = 'ci-pipeline-rpmbuild'
         stage (currentStage) {
-            echo "Our main topic is ${config.mainTopic}"
-            sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
-            sh "echo 'Project Repo is ${config.projectRepo}...'"
+            echo "Our main topic is ${env.MAIN_TOPIC}"
+            sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
+            sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
             env.DUFFY_OPS = "--allocate"
             getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
             env.DUFFY_OPS = "--teardown"
@@ -21,9 +21,9 @@ def call(body) {
         }
         currentStage = 'ci-pipeline-ostree-compose'
         stage (currentStage) {
-            echo "Our main topic is ${config.mainTopic}"
-            sh "echo 'rpmmbuild building on branch ${config.targetBranch} ...'"
-            sh "echo 'Project Repo is ${config.projectRepo}...'"
+            echo "Our main topic is ${env.MAIN_TOPIC}"
+            sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
+            sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
             env.DUFFY_OPS = "--allocate"
             getDuffy.duffy(currentStage, "${env.DUFFY_OPS}")
             env.DUFFY_OPS = "--teardown"
