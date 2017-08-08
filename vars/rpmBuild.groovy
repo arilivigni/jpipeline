@@ -1,3 +1,7 @@
+@Library('ci-pipeline') _
+
+def getDuffy = new duffy()
+
 def call(body) {
 
     def config = [:]
@@ -5,7 +9,6 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new duffy()
     //node {
     // Clean workspace before doing anything
     // deleteDir()
