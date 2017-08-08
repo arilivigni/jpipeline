@@ -1,7 +1,6 @@
-def getDuffy = new duffy()
-
 def call(body) {
 
+    def getDuffy = new duffy()
 
     def config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
