@@ -10,6 +10,8 @@ def call(body) {
     def getDuffy = new duffy()
 
     node('shared-lib-test') {
+        deleteDir()
+
         try {
             def current_stage = 'ci-pipeline-rpmbuild'
             stage(current_stage) {
