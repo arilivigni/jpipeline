@@ -8,7 +8,6 @@ def call(body) {
     body()
 
     def getDuffy = new duffy()
-
     node('shared-lib-test') {
         deleteDir()
 
