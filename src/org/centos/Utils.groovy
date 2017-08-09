@@ -16,13 +16,13 @@ def duffy(stage,  duffyOps = '--allocate', duffyKey = 'duffy-key',
     env.DUFFY_OP = "${duffyOps}"
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
 
-    if ( !(new File(subdir).isDirectory()) ){
+    if (! (fileExists(subDir)) ){
         dir(subDir) {
             git repoUrl
         }
     }
 
-    if (duffyOps != "--no-op") {
+    if (duffyOps != "--no-op"){
 
         withCredentials([file(credentialsId: duffyKey, variable: 'DUFFY_KEY')]) {
             sh '''
