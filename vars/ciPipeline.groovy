@@ -1,4 +1,4 @@
-@Library('ci-pipeline') _
+import org.centos.*
 
 def call(body) {
 
