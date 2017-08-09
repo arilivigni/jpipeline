@@ -1,3 +1,5 @@
+import org.centos.*
+
 def call(body) {
 
     def config = [:]
