@@ -3,7 +3,7 @@
 
 node ('shared-lib-test') {
     deleteDir()
-    ci - pipeline {
+    ci-pipeline {
 
     }
 }
