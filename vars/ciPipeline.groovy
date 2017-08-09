@@ -1,4 +1,4 @@
-import org.centos.*
+import org.centos.duffy
 
 def call(body) {
 
