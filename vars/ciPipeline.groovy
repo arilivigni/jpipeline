@@ -9,26 +9,14 @@ def call(body) {
 
     def getDuffy = new Utils()
     try {
-        def current_stage = 'ci-pipeline-rpmbuild'
+        def current_stage = 'cico-pipeline-lib-stage1'
         stage(current_stage) {
-            echo "Our main topic is ${env.MAIN_TOPIC}"
-            sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
-            sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
-            env.DUFFY_OPS = "--allocate"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
-            env.DUFFY_OPS = "--teardown"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
+            getDuffy.duffyCciskel(current_stage)
 
         }
-        current_stage = 'ci-pipeline-ostree-compose'
+        current_stage = 'cico-pipeline-lib-stage2'
         stage(current_stage) {
-            echo "Our main topic is ${env.MAIN_TOPIC}"
-            sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
-            sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
-            env.DUFFY_OPS = "--allocate"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
-            env.DUFFY_OPS = "--teardown"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
+            getDuffy.duffyCciskel(current_stage)
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
