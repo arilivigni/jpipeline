@@ -1,9 +1,9 @@
-@Library('cico-pipeline-library') _
+@Library('ci-pipeline') _
 
 
 node ('shared-lib-test') {
     deleteDir()
-    ci-pipeline {
+    ciPipeline {
 
     }
 }
