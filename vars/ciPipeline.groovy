@@ -1,4 +1,4 @@
-@Library('cico-pipeline-library') _
+@Library('ci-pipeline') _
 
 def call(body) {
 
