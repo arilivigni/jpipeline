@@ -9,7 +9,7 @@ def call(body) {
 
     try {
         def current_stage = 'ci-pipeline-rpmbuild'
-        stage (currentStage) {
+        stage(current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
             sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
@@ -20,7 +20,7 @@ def call(body) {
 
         }
         current_stage = 'ci-pipeline-ostree-compose'
-        stage (currentStage) {
+        stage(current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
             sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
