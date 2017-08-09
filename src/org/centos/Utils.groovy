@@ -16,7 +16,7 @@ def duffy(stage,  duffyOps = '--allocate', duffyKey = 'duffy-key',
     env.DUFFY_OP = "${duffyOps}"
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
 
-    if (!(fileExists(subDir))) {
+    if ( !(new File(subdir).isDirectory()) ){
         dir(subDir) {
             git repoUrl
         }
