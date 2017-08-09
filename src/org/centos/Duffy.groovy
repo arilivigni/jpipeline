@@ -1,8 +1,10 @@
 #!/usr/bin/groovy
 package org.centos
 
-// Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
-// duffyOps can be '--allocate', '--teardown', and '--no-op'
+/**
+ * Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
+ * duffyOps can be '--allocate', '--teardown', and '--no-op'
+*/
 def duffy(stage,  duffyOps = '--allocate', duffyKey = 'duffy-key',
           repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton', subDir = 'cciskel') {
 

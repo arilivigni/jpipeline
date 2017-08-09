@@ -1,4 +1,4 @@
-import org.centos.Duffy
+import org.centos.Utils
 
 def call(body) {
 
@@ -7,7 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new Duffy()
+    def getDuffy = new Utils()
     try {
         def current_stage = 'ci-pipeline-rpmbuild'
         stage(current_stage) {
