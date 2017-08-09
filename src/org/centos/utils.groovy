@@ -1,3 +1,6 @@
+#!/usr/bin/groovy
+package org.centos
+
 // Convert bash shell properties to groovy
 
 def convertProps(file1, file2) {

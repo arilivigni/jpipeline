@@ -1,3 +1,6 @@
+#!/usr/bin/groovy
+package org.centos
+
 def pipe(command){
     sh(script: command, returnStdout: true)
 }
