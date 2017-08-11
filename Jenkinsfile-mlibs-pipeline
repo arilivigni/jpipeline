@@ -1,5 +1,5 @@
-@Library('jpipeline-library') _
-@Library('cico-pipeline-library') _
+@Library('jpipeline-library') import org.centos.jpipeline.*
+@Library('cico-pipeline-library') import org.centos.*
 
 
 node {
