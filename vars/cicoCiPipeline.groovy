@@ -16,7 +16,7 @@ def call(body) {
         }
         current_stage = 'cico-pipeline-lib-stage2'
         stage(current_stage) {
-            //getDuffy.duffyCciskel(current_stage)
+            getDuffy.duffyCciskel(current_stage)
             echo current_stage
         }
     } catch (err) {
