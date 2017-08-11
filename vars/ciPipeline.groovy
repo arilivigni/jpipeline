@@ -1,4 +1,4 @@
-import org.centos.jpipeline.Utils
+import org.centos.jpipeline.Duffy
 
 def call(body) {
 
@@ -7,7 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new Utils()
+    def getDuffy = new Duffy()
     try {
         def current_stage = 'cico-pipeline-lib-stage1'
         stage(current_stage) {
