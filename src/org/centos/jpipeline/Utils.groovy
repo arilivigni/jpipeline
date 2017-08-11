@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package org.centos
+package org.centos.jpipeline
 
 /**
  * Wrapper function to allocate duffy resources using cciskel

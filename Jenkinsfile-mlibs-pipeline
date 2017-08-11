@@ -1,0 +1,10 @@
+@Library('jpipeline-library') _
+@Library('cico-pipeline-library') _
+
+
+node {
+    deleteDir()
+    cicoCiPipeline {
+
+    }
+}

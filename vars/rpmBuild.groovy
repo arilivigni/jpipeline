@@ -1,4 +1,4 @@
-import org.centos.*
+import org.centos.jpipeline.Utils
 
 def call(body) {
 
@@ -7,8 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new duffy()
-    def getProps = new utils()
+    def getProps = new Utils()
 
     try {
         def current_stage = 'ci-pipeline-rpmbuild'
@@ -17,7 +16,7 @@ def call(body) {
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
             sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
             env.DUFFY_OPS = "--allocate"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
+            getDuffy.duffyCciskel(current_stage, "${env.DUFFY_OPS}")
             sh '''
                 echo "branch=${TARGET_BRANCH}" > ${WORKSPACE}/job.properties
                 echo "topic=${MAIN_TOPIC}.package.complete" >> ${WORKSPACE}/job.properties
@@ -31,7 +30,7 @@ def call(body) {
             '''
             load(job_props_groovy)
             env.DUFFY_OPS = "--teardown"
-            getDuffy.duffy(current_stage, "${env.DUFFY_OPS}")
+            getDuffy.duffyCciskel(current_stage, "${env.DUFFY_OPS}")
 
         }
     } catch (err) {

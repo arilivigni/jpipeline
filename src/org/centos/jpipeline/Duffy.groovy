@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-package org.centos
+package org.centos.jpipeline
 
 /**
  * Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
