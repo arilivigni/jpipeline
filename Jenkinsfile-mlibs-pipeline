@@ -1,5 +1,5 @@
-@Library('jpipeline-library') import org.centos.jpipeline.*
-@Library('cico-pipeline-library') import org.centos.*
+@Library('github.com/arilivigni/jpipeline@master') import org.centos.jpipeline.*
+@Library('github.com/CentOS/cico-pipeline-library@master') import org.centos.jpipeline.*
 
 
 node {
