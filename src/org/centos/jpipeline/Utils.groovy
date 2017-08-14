@@ -38,7 +38,8 @@ def duffyCciskel(duffyMap) {
         }
     }
 
-    withCredentials([file(credentialsId: duffyMap.get('duffyKey','duffy-key'), variable: 'DUFFY_KEY')]) {
+//    withCredentials([file(credentialsId: duffyMap.get('duffyKey','duffy-key'), variable: 'DUFFY_KEY')]) {
+    withCredentials([file(credentialsId: 'duffy-key', variable: 'DUFFY_KEY')]) {
         sh '''
                 #!/bin/bash
                 set -xeuo pipefail
