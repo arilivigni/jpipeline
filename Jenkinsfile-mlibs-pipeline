@@ -4,7 +4,5 @@
 
 node {
     deleteDir()
-    cicoCiPipeline {
-
-    }
+    cicoCiPipeline { }
 }
