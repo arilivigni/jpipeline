@@ -22,24 +22,27 @@ def teardownDuffyCciskel(stage) {
  *  duffyMap[stage:'duffyCciskel-stage', originClass:'builder', duffyTimeoutSecs:'3600,
  *           duffyOps:'', subDir:'cciskel',
  *           repoUrl:'https://github.com/cgwalters/centos-ci-skeleton'
+ *           duffyKey: 'duffy-key']
+ *  duffyKey refers to a file credential setup in Jenkins credentials
  */
 def duffyCciskel(duffyMap) {
 
-    env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${duffyMap.get('stage','duffyCciskel-stage')}"
-    env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${duffyMap.get('stage','duffyCciskel-stage')}"
-    env.ORIGIN_CLASS = "${duffyMap.get('originClass','builder')}"
-    env.DUFFY_JOB_TIMEOUT_SECS = "${duffyMap.get('duffyTimeoutSecs','3600')}"
-    env.DUFFY_OP = "${duffyMap.get('duffyOps','')}"
-    echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
+    env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${duffyMap.containsKey('stage') ? duffyMap.stage : 'duffyCciskel-stage'}"
+    env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${duffyMap.stage}"
+    env.ORIGIN_CLASS = "${duffyMap.containsKey('originClass') ? duffyMap.originClass : 'builder'}"
+    env.DUFFY_JOB_TIMEOUT_SECS = "${duffyMap.containsKey('duffyTimeoutSecs') ? duffyMap.duffyTimoutSecs : '3600'}"
+    env.DUFFY_OP = "${duffyMap.containsKey('duffyOps') ? duffyMap.duffyOps : ''}"
+    echo "Currently in stage: ${duffyMap.stage} ${env.DUFFY_OP} resources"
+    subDir = duffyMap.containsKey('subDir') ? duffyMap.subDir : 'cciskel'
 
-    if (! (fileExists(duffyMap.get('subDir','cciskel'))) ){
+    if (! (fileExists(subDir)) ){
         dir(subDir) {
-            git duffyMap.get('repoUrl','https://github.com/cgwalters/centos-ci-skeleton')
+            git duffyMap.containsKey('repoUrl') ? duffyMap.repoUrl : 'https://github.com/cgwalters/centos-ci-skeleton'
         }
     }
 
-//    withCredentials([file(credentialsId: duffyMap.get('duffyKey','duffy-key'), variable: 'DUFFY_KEY')]) {
-    withCredentials([file(credentialsId: 'duffy-key', variable: 'DUFFY_KEY')]) {
+    withCredentials([file(credentialsId: duffyMap.containsKey('duffyKey') ? duffyMap.duffyKey : 'duffy-key',
+                    variable: 'DUFFY_KEY')]) {
         sh '''
                 #!/bin/bash
                 set -xeuo pipefail
