@@ -10,7 +10,7 @@ def call(body) {
     def getUtils = new Utils()
     try {
         def current_stage = 'cico-pipeline-lib-stage1'
-        def duffyCciskelOps = [stage:"${current_stage}"]
+        def duffyCciskelOps = [stage:current_stage]
         stage(current_stage) {
             getDuffy.duffyCciskel(duffyCciskelOps)
         }
