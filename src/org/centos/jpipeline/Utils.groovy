@@ -19,11 +19,14 @@ def teardownDuffyCciskel(stage) {
  * Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
  * Pass a map to the library
  * duffyMap defaults:
- *  duffyMap[stage:'duffyCciskel-stage', originClass:'builder', duffyTimeoutSecs:'3600,
- *           duffyOps:'', subDir:'cciskel',
- *           repoUrl:'https://github.com/cgwalters/centos-ci-skeleton'
+ *  duffyMap[stage:'duffyCciskel-stage',
+ *           originClass:'builder',
+ *           duffyTimeoutSecs:'3600,
+ *           duffyOps:'',
+ *           subDir:'cciskel',
+ *           repoUrl:'https://github.com/cgwalters/centos-ci-skeleton',
  *           duffyKey: 'duffy-key']
- *  duffyKey refers to a file credential setup in Jenkins credentials
+ *  duffyKey refers to a secret-file credential setup in Jenkins credentials
  */
 def duffyCciskel(duffyMap) {
 
