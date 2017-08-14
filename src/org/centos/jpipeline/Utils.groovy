@@ -72,7 +72,7 @@ def convertProps(shellFile) {
     def command = $/awk -F'=' '{print "env."$1"=\""$2"\""}' ${shellFile} > ${shellFile}.groovy/$
     sh command
 
-    return ${shellFile}.groovy
+    return "${shellFile}.groovy"
 }
 
 // ensure we return 'this' on last line to allow this script to be loaded into flows
