@@ -7,7 +7,7 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new Utils()
+    def getUtils = new Utils()
     def pipelineProps = ''
     try {
         def current_stage = 'cico-pipeline-lib-stage1'
@@ -19,7 +19,7 @@ def call(body) {
         current_stage = 'cico-pipeline-lib-stage2'
         stage(current_stage) {
             // Convert a classic shell properties file to groovy format to be loaded
-            pipelineProps = convertProps("${env.WORKSPACE}/job.properties")
+            pipelineProps = getUtils.convertProps("${env.WORKSPACE}/job.properties")
             // Load these as environment variables into the pipeline
             load(pipelineProps)
             sh '''
