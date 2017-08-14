@@ -17,26 +17,28 @@ def teardownDuffyCciskel(stage) {
 
 /**
  * Method for allocating and tearing down duffy resources using https://github.com/cgwalters/centos-ci-skeleton
- * duffyOps - Can be '--allocate', or '--teardown'
- * duffyKey - Needs to be defined as a credential in your Jenkins instance
+ * Pass a map to the library
+ * duffyMap defaults:
+ *  duffyMap[stage:'duffyCciskel-stage', originClass:'builder', duffyTimeoutSecs:'3600,
+ *           duffyOps:'', subDir:'cciskel',
+ *           repoUrl:'https://github.com/cgwalters/centos-ci-skeleton'
  */
-def duffyCciskel(stage,  duffyOps = '', duffyKey = 'duffy-key',
-                 repoUrl = 'https://github.com/cgwalters/centos-ci-skeleton', subDir = 'cciskel') {
+def duffyCciskel(duffyMap) {
 
-    env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${stage}"
-    env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${stage}"
-    env.ORIGIN_CLASS = "builder"
-    env.DUFFY_JOB_TIMEOUT_SECS = "3600"
-    env.DUFFY_OP = "${duffyOps}"
+    env.ORIGIN_WORKSPACE = "${env.WORKSPACE}/${duffyMap.get('stage','duffyCciskel-stage')}"
+    env.ORIGIN_BUILD_TAG = "${env.BUILD_TAG}-${duffyMap.get('stage','duffyCciskel-stage')}"
+    env.ORIGIN_CLASS = "${duffyMap.get('originClass','builder')}"
+    env.DUFFY_JOB_TIMEOUT_SECS = "${duffyMap.get('duffyTimeoutSecs','3600')}"
+    env.DUFFY_OP = "${duffyMap.get('duffyOps','')}"
     echo "Currently in stage: ${stage} ${env.DUFFY_OP} resources"
 
-    if (! (fileExists(subDir)) ){
+    if (! (fileExists(duffyMap.get('subDir','cciskel'))) ){
         dir(subDir) {
-            git repoUrl
+            git duffyMap.get('repoUrl','https://github.com/cgwalters/centos-ci-skeleton')
         }
     }
 
-    withCredentials([file(credentialsId: duffyKey, variable: 'DUFFY_KEY')]) {
+    withCredentials([file(credentialsId: duffyMap.get('duffyOps','duffy-key'), variable: 'DUFFY_KEY')]) {
         sh '''
                 #!/bin/bash
                 set -xeuo pipefail

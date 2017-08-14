@@ -7,16 +7,16 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getDuffy = new Utils()
+    def getUtils = new Utils()
     try {
         def current_stage = 'cico-pipeline-lib-stage1'
+        def duffyCciskelOps = [stage:current_stage]
         stage(current_stage) {
-            getDuffy.duffyCciskel(current_stage)
-
+            getDuffy.duffyCciskel(duffyCciskelOps)
         }
         current_stage = 'cico-pipeline-lib-stage2'
         stage(current_stage) {
-            getDuffy.duffyCciskel(current_stage)
+            getUtils.duffyCciskel(duffyCciskelOps)
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
