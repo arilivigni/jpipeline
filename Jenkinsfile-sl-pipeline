@@ -1,4 +1,4 @@
-@Library('ci-pipeline') _
+@Library('github.com/arilivigni/jpipeline@master') import org.centos.jpipeline.*
 
 
 node {
