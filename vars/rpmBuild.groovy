@@ -35,7 +35,7 @@ def call(body) {
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
-        echo e.getMessage()
+        echo err.getMessage()
         throw err
     }
 }
