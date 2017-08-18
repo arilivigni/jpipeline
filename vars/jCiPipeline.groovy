@@ -9,7 +9,6 @@ def call(body) {
         rpmBuild {}
         ostreeCompose {}
     } catch (err) {
-        echo "Error: Exception from " + current_stage + ":"
         echo err.getMessage()
         throw err
     }
