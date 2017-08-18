@@ -18,7 +18,13 @@ properties(
 node {
     ansiColor('xterm') {
         timestamps {
-            jCiPipeline {}
+            try {
+                deleteDir()
+                jCiPipeline {}
+            } catch (err) {
+                echo err.getMessage()
+                throw err
+            }
         }
     }
 }

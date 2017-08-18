@@ -16,8 +16,8 @@ def call(body) {
             sh '''
                 echo "rpm build on branch ${TARGET_BRANCH} ..."
              '''
-            //env.DUFFY_OPS = "--allocate"
-            env.DUFFY_OPS = ""
+            env.DUFFY_OPS = "--allocate"
+            //env.DUFFY_OPS = ""
             getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
             env.branch = env.TARGET_BRANCH
             env.topic = "${MAIN_TOPIC}.package.complete"
@@ -32,8 +32,8 @@ def call(body) {
                 cat ${WORKSPACE}/job.properties
                 cat ${WORKSPACE}/job.properties.groovy
             '''
-            //env.DUFFY_OPS = "--teardown"
-            env.DUFFY_OPS = ""
+            env.DUFFY_OPS = "--teardown"
+            //env.DUFFY_OPS = ""
             echo "TOPIC: ${env.topic}"
             echo "BRANCH: ${env.TARGET_BRANCH}"
             getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
