@@ -17,7 +17,7 @@ def call(body) {
                 echo "rpm build on branch ${TARGET_BRANCH} ..."
              '''
             env.DUFFY_OPS = "--allocate"
-            getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
+            //getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
             env.branch = env.TARGET_BRANCH
             env.topic = "${MAIN_TOPIC}.package.complete"
             sh '''
@@ -34,7 +34,7 @@ def call(body) {
             env.DUFFY_OPS = "--teardown"
             echo "TOPIC: ${env.topic}"
             echo "BRANCH: ${env.TARGET_BRANCH}"
-            getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
+            //getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
