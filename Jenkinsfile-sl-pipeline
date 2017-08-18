@@ -20,7 +20,7 @@ properties(
 node {
     ansiColor('xterm') {
         timestamps {
-            JCiPipeline {}
+            jCiPipeline {}
         }
     }
 }
