@@ -50,9 +50,6 @@ def duffyCciskel(duffyMap) {
     echo "DUFFY_JOB_TIMEOUT_SECS: ${env.DUFFY_JOB_TIMEOUT_SECS}"
     echo "DUFFY_OP: ${env.DUFFY_OP}"
     echo "subDir: ${subDir}"
-    sh '''
-        ls -la cciskel 
-    '''
 
     withCredentials([file(credentialsId: duffyMap.containsKey('duffyKey') ? duffyMap.duffyKey : 'duffy-key',
                     variable: 'DUFFY_KEY')]) {
