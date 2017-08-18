@@ -1,7 +1,26 @@
 @Library('github.com/arilivigni/jpipeline@master') import org.centos.jpipeline.*
+@Library('github.com/CentOS/cico-pipeline-library@master') import org.centos.*
+
+properties(
+        [
+                buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '25', daysToKeepStr: '', numToKeepStr: '50')),
+                disableConcurrentBuilds(),
+                parameters(
+                        [
+                                string(defaultValue: 'f26', description: 'Fedora target branch', name: 'TARGET_BRANCH'),
+                                string(defaultValue: 'org.centos.stage', description: 'Main topic to publish on', name: 'MAIN_TOPIC'),
+                                string(defaultValue: 'fedora-fedmsg', description: 'Main provider to send messages on', name: 'MSG_PROVIDER'),
+                                booleanParam(defaultValue: false, description: 'Force generation of the image', name: 'GENERATE_IMAGE'),
+                        ]
+                ),
+        ]
+)
 
 
 node {
-    deleteDir()
-    ciPipeline { }
+    ansiColor('xterm') {
+        timestamps {
+            ciPipeline {}
+        }
+    }
 }

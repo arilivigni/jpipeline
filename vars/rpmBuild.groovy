@@ -1,4 +1,4 @@
-import org.centos.jpipeline.Utils
+import org.centos.Utils
 
 def call(body) {
 
@@ -14,24 +14,25 @@ def call(body) {
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh "echo 'rpmmbuild building on branch ${env.TARGET_BRANCH} ...'"
-            sh "echo 'Project Repo is ${env.PROJECT_REPO}...'"
             env.DUFFY_OPS = "--allocate"
-            getDuffy.duffyCciskel(current_stage, "${env.DUFFY_OPS}")
+            getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OP])
+            env.branch = env.TARGET_BRANCH
+            env.topic = "${MAIN_TOPIC}.package.complete"
             sh '''
-                echo "branch=${TARGET_BRANCH}" > ${WORKSPACE}/job.properties
-                echo "topic=${MAIN_TOPIC}.package.complete" >> ${WORKSPACE}/job.properties
+                echo "branch=${branch}" > ${WORKSPACE}/job.properties
+                echo "topic=${topic}" >> ${WORKSPACE}/job.properties
             '''
             def job_props = "${env.WORKSPACE}/job.properties"
-            def job_props_groovy = "${env.WORKSPACE}/job.properties.groovy"
-            getProps.convertProps(job_props, job_props_groovy)
+            def job_props_groovy = getUtils.convertProps(job_props)
+            load(job_props_groovy)
             sh '''
                 cat ${WORKSPACE}/job.properties
                 cat ${WORKSPACE}/job.properties.groovy
             '''
-            load(job_props_groovy)
             env.DUFFY_OPS = "--teardown"
-            getDuffy.duffyCciskel(current_stage, "${env.DUFFY_OPS}")
-
+            echo "TOPIC: ${env.topic}"
+            echo "BRANCH: ${env.TARGET_BRANCH}"
+            getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OP])
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"

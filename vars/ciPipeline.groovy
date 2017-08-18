@@ -1,5 +1,3 @@
-import org.centos.jpipeline.Utils
-
 def call(body) {
 
     def config = [:]
@@ -7,20 +5,9 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getUtils = new Utils()
-    def current_stage = 'cico-pipeline-lib-stage'
-    def duffyCciskelOps = [:]
     try {
-        current_stage = 'cico-pipeline-lib-stage1'
-        duffyCciskelOps = [stage:current_stage]
-        stage(current_stage) {
-            getUtils.duffyCciskel(duffyCciskelOps)
-        }
-        current_stage = 'cico-pipeline-lib-stage2'
-        duffyCciskelOps = [stage:current_stage]
-        stage(current_stage) {
-            getUtils.duffyCciskel(duffyCciskelOps)
-        }
+        rpmBuild {}
+        ostreeCompose {}
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
         echo err.getMessage()
