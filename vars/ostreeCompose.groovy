@@ -14,7 +14,7 @@ def call(body) {
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
-                echo "ostree compose on branch ${env.TARGET_BRANCH} ..."
+                echo "ostree compose on branch ${TARGET_BRANCH} ..."
              '''
             env.DUFFY_OPS = "--allocate"
             getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OP])
