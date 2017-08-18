@@ -1,4 +1,4 @@
-import org.centos.Utils
+import org.centos.jpipeline.Utils
 
 def call(body) {
 
