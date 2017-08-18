@@ -7,10 +7,10 @@ def call(body) {
     body.delegate = config
     body()
 
-    def getProps = new Utils()
+    def getUtils = new Utils()
+    def current_stage = 'ci-pipeline-rpmbuild'
 
     try {
-        def current_stage = 'ci-pipeline-rpmbuild'
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''

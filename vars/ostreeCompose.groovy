@@ -8,9 +8,9 @@ def call(body) {
     body()
 
     def getUtils = new Utils()
+    def current_stage = 'ci-pipeline-ostree-compose'
 
     try {
-        def current_stage = 'ci-pipeline-ostree-compose'
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
