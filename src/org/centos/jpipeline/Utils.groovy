@@ -44,6 +44,16 @@ def duffyCciskel(duffyMap) {
         }
     }
 
+    echo "ORIGIN_WORKSPACE: ${env.ORIGIN_WORKSPACE}"
+    echo "ORIGIN_BUILD_TAG: ${env.ORIGIN_BUILD_TAG}"
+    echo "ORIGIN_CLASS: ${env.ORIGIN_CLASS}"
+    echo "DUFFY_JOB_TIMEOUT_SECS: ${env.DUFFY_JOB_TIMEOUT_SECS}"
+    echo "DUFFY_OP: ${env.DUFFY_OP}"
+    echo "subDir: ${subDir}"
+    sh '''
+        ls -la 
+    '''
+
     withCredentials([file(credentialsId: duffyMap.containsKey('duffyKey') ? duffyMap.duffyKey : 'duffy-key',
                     variable: 'DUFFY_KEY')]) {
         sh '''
