@@ -13,7 +13,9 @@ def call(body) {
         def current_stage = 'ci-pipeline-ostree-compose'
         stage (current_stage) {
             echo "Our main topic is ${env.MAIN_TOPIC}"
-            sh "echo 'ostreeCompose on branch ${env.TARGET_BRANCH} ...'"
+            sh '''
+                echo "ostree compose on branch ${env.TARGET_BRANCH} ..."
+             '''
             env.DUFFY_OPS = "--allocate"
             getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OP])
             env.branch = env.TARGET_BRANCH
