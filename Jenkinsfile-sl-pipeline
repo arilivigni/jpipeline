@@ -1,5 +1,7 @@
-@Library('github.com/arilivigni/jpipeline@master') import org.centos.jpipeline.*
-@Library('github.com/CentOS/cico-pipeline-library@master') import org.centos.*
+@Library(['github.com/arilivigni/jpipeline@master', 'github.com/CentOS/cico-pipeline-library@master'])
+import org.centos.jpipeline.*
+import org.centos.*
+
 
 properties(
         [
