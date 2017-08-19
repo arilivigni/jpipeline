@@ -17,8 +17,9 @@ def call(body) {
         }
 
         rpmBuild {}
-        sh 'sleep 10'
+        sh 'sleep 3'
         ostreeCompose {}
+        sh 'sleep 3'
         ostreeBootSanity {}
     } catch (err) {
         echo err.getMessage()
