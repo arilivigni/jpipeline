@@ -12,6 +12,8 @@ def call(body) {
 
     try {
         stage (current_stage) {
+            currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Stage: ${current_stage} Branch: ${env.branch}"
+            currentBuild.description = "${currentBuild.currentResult}"
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
                 echo "ostree compose on branch ${TARGET_BRANCH} ..."
@@ -40,8 +42,10 @@ def call(body) {
         echo err.getMessage()
         throw err
     } finally {
-        //env.DUFFY_OPS = "--teardown"
-        env.DUFFY_OPS = ""
-        getUtils.duffyCciskel([stage: current_stage, duffyKey: 'duffy-key', duffyOps: env.DUFFY_OP])
+        messageProperties = "topic=${topic}\n" +
+                "build_url=${BUILD_URL}\n" +
+                "build_id=${BUILD_ID}\n" +
+                "branch=${branch}\n" +
+                "status=${currentBuild.currentResult}"
     }
 }
