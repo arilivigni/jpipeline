@@ -20,6 +20,7 @@ properties(
 node {
     ansiColor('xterm') {
         timestamps {
+            def current_stage = ''
             try {
                 deleteDir()
                 jCiPipeline {}
@@ -32,6 +33,7 @@ node {
                 env.topic = "${env.MAIN_TOPIC}.ci.pipeline.complete"
                 echo "TOPIC: ${env.topic}"
                 echo "MESSAGE PROPERTIES\n${env.MSG_PROPS}"
+                echo "STAGE: ${current_stage}"
             }
         }
     }
