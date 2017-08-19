@@ -32,7 +32,7 @@ node {
                 currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
                 currentBuild.description = "${currentBuild.currentResult}"
                 echo "TOPIC: ${env.topic}"
-                echo "MESSAGE PROPERTIES\n ${messageProperties}"
+                echo "MESSAGE PROPERTIES\n ${env.messageProperties}"
             }
         }
     }
