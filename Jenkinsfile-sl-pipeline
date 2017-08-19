@@ -20,8 +20,6 @@ properties(
 node {
     ansiColor('xterm') {
         timestamps {
-            def messageProperties = ''
-
             try {
                 deleteDir()
                 jCiPipeline {}
@@ -31,8 +29,9 @@ node {
             } finally {
                 currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
                 currentBuild.description = "${currentBuild.currentResult}"
+                env.topic = "${env.MAIN_TOPIC}.ci.pipeline.complete"
                 echo "TOPIC: ${env.topic}"
-                echo "MESSAGE PROPERTIES\n ${env.messageProperties}"
+                echo "MESSAGE PROPERTIES\n${env.MSG_PROPS}"
             }
         }
     }

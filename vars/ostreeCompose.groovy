@@ -42,10 +42,11 @@ def call(body) {
         echo err.getMessage()
         throw err
     } finally {
-        env.messageProperties = "topic=${topic}\n" +
+        messageProperties = "topic=${topic}\n" +
                 "build_url=${BUILD_URL}\n" +
                 "build_id=${BUILD_ID}\n" +
                 "branch=${branch}\n" +
                 "status=${currentBuild.currentResult}"
+        env.MSG_PROPS = messageProperties
     }
 }

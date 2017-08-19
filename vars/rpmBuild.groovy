@@ -47,5 +47,6 @@ def call(body) {
                 "build_id=${BUILD_ID}\n" +
                 "branch=${branch}\n" +
                 "status=${currentBuild.currentResult}"
+        env.MSG_PROPS = messageProperties
     }
 }
