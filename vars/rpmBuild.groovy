@@ -14,8 +14,8 @@ def call(body) {
         stage (current_stage) {
             env.branch = env.TARGET_BRANCH
             env.topic = "${MAIN_TOPIC}.package.complete"
-            currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Stage: ${current_stage} - Branch: ${env.branch}"
-            currentBuild.description = "${currentBuild.currentResult}"
+            currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
+            currentBuild.description = "Stage: ${current_stage} - ${currentBuild.currentResult}"
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
                 echo "rpm build on branch ${TARGET_BRANCH} ..."
