@@ -35,7 +35,7 @@ node {
                 echo "MESSAGE PROPERTIES\n${env.MSG_PROPS}"
                 echo "STAGE: ${env.CURRENT_STAGE}"
                 step([$class: 'ArtifactArchiver', allowEmptyArchive: true,
-                      artifacts: '**/**',
+                      artifacts: 'jpipeline/**, .*props.*',
                       fingerprint: true])
             }
         }

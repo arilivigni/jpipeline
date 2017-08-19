@@ -11,6 +11,11 @@ def call(body) {
     def getUtils = new Utils()
 
     try {
+        // SCM
+        dir('jpipeline') {
+            git 'https://github.com/arilivigni/jpipeline'
+        }
+
         rpmBuild {}
         sh 'sleep 10'
         ostreeCompose {}
