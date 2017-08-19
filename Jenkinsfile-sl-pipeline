@@ -33,7 +33,7 @@ node {
                 env.topic = "${env.MAIN_TOPIC}.ci.pipeline.complete"
                 echo "TOPIC: ${env.topic}"
                 echo "MESSAGE PROPERTIES\n${env.MSG_PROPS}"
-                echo "STAGE: ${current_stage}"
+                echo "STAGE: ${env.CURRENT_STAGE}"
             }
         }
     }

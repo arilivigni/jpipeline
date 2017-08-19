@@ -48,5 +48,6 @@ def call(body) {
                 "branch=${branch}\n" +
                 "status=${currentBuild.currentResult}"
         env.MSG_PROPS = messageProperties
+        env.CURRENT_STAGE = current_stage
     }
 }
