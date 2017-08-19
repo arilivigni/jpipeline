@@ -28,7 +28,7 @@ node {
                 throw err
             } finally {
                 currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
-                currentBuild.description = "${currentBuild.currentResult}"
+                currentBuild.description = "Build Result: ${currentBuild.currentResult}"
                 env.topic = "${env.MAIN_TOPIC}.ci.pipeline.complete"
                 echo "TOPIC: ${env.topic}"
                 echo "MESSAGE PROPERTIES\n${env.MSG_PROPS}"
