@@ -8,7 +8,8 @@ def call(body) {
     body()
 
     def current_stage = ""
-    def getUtils = New Utils()
+    def getUtils = new Utils()
+
     try {
         rpmBuild {}
         ostreeCompose {}
