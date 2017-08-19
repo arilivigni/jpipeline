@@ -12,7 +12,9 @@ def call(body) {
 
     try {
         stage (current_stage) {
-            currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Stage: ${current_stage} Branch: ${env.branch}"
+            env.branch = env.TARGET_BRANCH
+            env.topic = "${MAIN_TOPIC}.package.complete"
+            currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Stage: ${current_stage} - Branch: ${env.branch}"
             currentBuild.description = "${currentBuild.currentResult}"
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
@@ -21,8 +23,6 @@ def call(body) {
             //env.DUFFY_OPS = "--allocate"
             env.DUFFY_OPS = ""
             getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
-            env.branch = env.TARGET_BRANCH
-            env.topic = "${MAIN_TOPIC}.package.complete"
             sh '''
                 echo "branch=${branch}" > ${WORKSPACE}/job.properties
                 echo "topic=${topic}" >> ${WORKSPACE}/job.properties

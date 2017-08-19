@@ -1,3 +1,5 @@
+import org.centos.Utils
+
 def call(body) {
 
     def config = [:]
@@ -6,6 +8,7 @@ def call(body) {
     body()
 
     def current_stage = ""
+    def getUitls = New Utils()
     try {
         rpmBuild {}
         ostreeCompose {}
