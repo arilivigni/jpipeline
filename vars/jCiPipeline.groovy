@@ -1,4 +1,4 @@
-import org.centos.Utils
+import org.centos.jpipeline.Utils
 
 def call(body) {
 
@@ -8,7 +8,7 @@ def call(body) {
     body()
 
     def current_stage = ""
-    def getUitls = New Utils()
+    def getUtils = New Utils()
     try {
         rpmBuild {}
         ostreeCompose {}
