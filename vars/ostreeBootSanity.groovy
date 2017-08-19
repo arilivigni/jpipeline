@@ -8,7 +8,7 @@ def call(body) {
     body()
 
     def getUtils = new Utils()
-    def current_stage = 'rpmbuild'
+    def current_stage = 'ostreeBootSanity'
 
     try {
         stage (current_stage) {

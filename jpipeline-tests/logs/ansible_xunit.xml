@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<testsuites errors="0" failures="0" tests="59" time="149.0">
+    <testsuite errors="0" failures="0" name="Ansible Tasks" skipped="14" tests="59" time="149">
+        <testcase classname="setup-libvirt-image.yml.all" name="Gathering Facts" time="1.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Install libvirt">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Enable/Start libvirtd">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : get list of vms">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Allocate VM storage on LVM">
+            <skipped message="[&quot;{\&quot;changed\&quot;: false, \&quot;msg\&quot;: \&quot;All items completed\&quot;}&quot;, &quot;{\&quot;changed\&quot;: false, \&quot;item\&quot;: {\&quot;key\&quot;: \&quot;atomic-host-fedoraah\&quot;, \&quot;value\&quot;: {\&quot;admin_passwd\&quot;: \&quot;$5$uX5x24soDWv3G2TH$BYxhEq4HmxjKmyChV0.VTpqxfhqMaRk8LCr34KOg2C7\&quot;, \&quot;admin_ssh_rsa\&quot;: \&quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtXQR3NJAxN7J0uxU0kf0CueebmUgtv13RFRvjdBJBAYWI8Cnu3nel7w411Uy9G7c4Fs9F9G4H7EhwymJgi5hCBc7GMV5ocD9irSQCq0ZKb18Zz9bn2qHJo19vKnadvcTASwqWASGnzkucHRgF57nU4wfGMAlIFz+7lMvRkS1yz/sp+4Ii3P1y5jsqpgXH8JEKY2T/6yerIk6sMzw/6Wbs3uhoaRaYcIQPXoaaSuzyC1Kxx/c7ttDyXxnOf2zZYwok3srYcC1XP4Jb6lzHJLlQK+fX+dLLsvkg6XKgup1aYi/WTll1gwwdHjbERpESsyWkYxtHboamxQIGIFZNdMmL builder@n45.dusty.ci.centos.org\&quot;, \&quot;disk\&quot;: \&quot;10G\&quot;, \&quot;img_url\&quot;: \&quot;http://artifacts.ci.centos.org/artifacts/fedora-atomic/f26/images/latest-atomic.qcow2\&quot;, \&quot;memory\&quot;: 3072}}, \&quot;skip_reason\&quot;: \&quot;Conditional result was False\&quot;, \&quot;skipped\&quot;: true}&quot;]" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : include">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : VM template folder">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Figure out Base Image Name">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Get http://artifacts.ci.centos.org/artifacts/fedora-atomic/f26/images/latest-atomic.qcow2" time="6.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : stat">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : stat">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Extract latest-atomic.qcow2.xz&quot;">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Extract latest-atomic.qcow2.gz&quot;">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Install latest-atomic.qcow2 to LVM">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Install latest-atomic.qcow2 to FILE">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Resize {{ item.key }}.img to {{ disk }}" time="7.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Remove latest-atomic.qcow2">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Prepare cloud-config/user-data">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Prepare cloud-config/meta-data">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Generate cidata cd image for cloud-init">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Generate add admin script">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Execute add admin script">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Disable cloud-config for virt-install">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Enable cloud-config for virt-install">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Enable LVM Install">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Enable FILE Install">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Install VM" time="24.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Remove cloud-init cdrom">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Start VM">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Give host time to boot">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Register hosts ip address">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Record hosts ip address">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : wait_for" time="9.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : include">
+            <skipped message="{&quot;msg&quot;: &quot;All items completed&quot;, &quot;changed&quot;: false}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="Gathering Facts" time="1.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="01 Get rpm-ostree status --json output">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="02 Convert to JSON">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="03 Set ros variable if deployment 0 is booted">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="04 Set ros variable if deployment 1 is booted">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="05 Deploy specific commit" time="24.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="06 restart system" time="1.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="07 ssh started 192.168.122.251" time="70.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="08 pause 5 seconds" time="5.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="09 ssh started 192.168.122.251">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="10 Get rpm-ostree status --json output" time="1.000000">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="11 Convert to JSON">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="12 Set ros variable if deployment 0 is booted">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="13 Set ros variable if deployment 1 is booted">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="ostree-boot-verify.yml.all" name="14 Verify specific commit">
+            <skipped message="{&quot;skipped&quot;: true, &quot;changed&quot;: false, &quot;skip_reason&quot;: &quot;Conditional result was False&quot;}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/ostree-boot-verify.yml&quot;, &quot;host&quot;: &quot;192.168.122.251&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="Gathering Facts">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Install libvirt">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Enable/Start libvirtd">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : get list of vms">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Allocate VM storage on LVM">
+            <skipped message="{&quot;msg&quot;: &quot;All items completed&quot;, &quot;changed&quot;: false}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : include">
+            <skipped message="{&quot;msg&quot;: &quot;All items completed&quot;, &quot;changed&quot;: false}" type="skipped"/>
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : include">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Stop VM">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Undefine VM">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+        <testcase classname="setup-libvirt-image.yml.all" name="libvirt-system : Remove libvirt image">
+            <system-out>{&quot;playbook_path&quot;: &quot;/home/builder/continuous-infra-ci-pipeline-f26-ci-pipeline-ostree-boot-sanity/ci-pipeline/playbooks/setup-libvirt-image.yml&quot;, &quot;host&quot;: &quot;ostree_compose_slave_baremetal&quot;}</system-out>
+        </testcase>
+    </testsuite>
+</testsuites>
