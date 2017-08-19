@@ -39,7 +39,7 @@ def call(body) {
 
              step([$class: 'XUnitBuilder',
                    thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                   tools: [[$class: 'JUnitType', pattern: "jpipeline/jpipeline-tests/logs/*.xml"]]]
+                   tools: [[$class: 'JUnitType', pattern: "**/**/*.xml"]]]
             )
         }
     } catch (err) {
