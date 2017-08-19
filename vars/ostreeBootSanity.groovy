@@ -39,7 +39,7 @@ def call(body) {
 
              step([$class: 'XUnitBuilder',
                    thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                   tools: [[$class: 'JUnitType', pattern: "${WORKSPACE}/**/**/*.xml"]]]
+                   tools: [[$class: 'JUnitType', pattern: "${WORKSPACE}/**/**/**/*.xml"]]]
             )
         }
     } catch (err) {
