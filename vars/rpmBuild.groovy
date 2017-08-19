@@ -8,7 +8,7 @@ def call(body) {
     body()
 
     def getUtils = new Utils()
-    def current_stage = 'ci-pipeline-rpmbuild'
+    def current_stage = 'rpmbuild'
 
     try {
         stage (current_stage) {

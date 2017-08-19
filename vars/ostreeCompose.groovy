@@ -8,7 +8,7 @@ def call(body) {
     body()
 
     def getUtils = new Utils()
-    def current_stage = 'ci-pipeline-ostree-compose'
+    def current_stage = 'ostree-compose'
 
     try {
         stage (current_stage) {
