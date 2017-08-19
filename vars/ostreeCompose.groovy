@@ -15,7 +15,7 @@ def call(body) {
             env.branch = env.TARGET_BRANCH
             env.topic = "${MAIN_TOPIC}.compose.complete"
             currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
-            currentBuild.description = "Stage: ${current_stage} - ${currentBuild.currentResult}"
+            currentBuild.description = "Stage: ${current_stage}"
             echo "Our main topic is ${env.MAIN_TOPIC}"
             sh '''
                 echo "ostree compose on branch ${TARGET_BRANCH} ..."
