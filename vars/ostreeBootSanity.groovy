@@ -37,10 +37,10 @@ def call(body) {
             echo "TOPIC: ${env.topic}"
             echo "BRANCH: ${env.TARGET_BRANCH}"
 
-            // step([$class: 'XUnitBuilder',
-            //       thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-            //       tools: [[$class: 'JUnitType', pattern: "${env.ORIGIN_WORKSPACE}/logs/*.xml"]]]
-            //)
+             step([$class: 'XUnitBuilder',
+                   thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
+                   tools: [[$class: 'JUnitType', pattern: "${WORKSPACE}/**/**/*.xml"]]]
+            )
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
