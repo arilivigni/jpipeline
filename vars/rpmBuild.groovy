@@ -32,15 +32,16 @@ def call(body) {
                 cat ${WORKSPACE}/job.properties
                 cat ${WORKSPACE}/job.properties.groovy
             '''
-            //env.DUFFY_OPS = "--teardown"
-            env.DUFFY_OPS = ""
             echo "TOPIC: ${env.topic}"
             echo "BRANCH: ${env.TARGET_BRANCH}"
-            getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OPS])
         }
     } catch (err) {
         echo "Error: Exception from " + current_stage + ":"
         echo err.getMessage()
         throw err
+    } finally {
+        //env.DUFFY_OPS = "--teardown"
+        env.DUFFY_OPS = ""
+        getUtils.duffyCciskel([stage:current_stage, duffyKey:'duffy-key', duffyOps:env.DUFFY_OP])
     }
 }

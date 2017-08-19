@@ -26,6 +26,9 @@ node {
             } catch (err) {
                 echo err.getMessage()
                 throw err
+            } finally {
+                currentBuild.displayName = "Build#: ${env.BUILD_NUMBER} - Branch: ${env.branch}"
+                currentBuild.description = "${currentBuild.currentResult}"
             }
         }
     }
